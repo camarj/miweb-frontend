@@ -1,8 +1,8 @@
 ---
 // Component Imports
-    import BlogGridHome from "../components/BlogGridHome.jsx"
-    const posts  =  await fetch(`http://192.168.100.28:1337/api/articles`).then(res => res.json())
-    console.log(posts);
+    import BlogGridHome from "../components/Blog/BlogGridHome"
+    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
+    const posts = result.data;
 ---
 
 <!DOCTYPE html>
@@ -1169,13 +1169,13 @@
   <div class="st-height-b100 st-height-lg-b80"></div>
   <div class="container">
     <div class="st-section-heading st-style1">
-      <h4 class="st-section-heading-title">BLOG</h4>
-      <h2 class="st-section-heading-subtitle">LATEST NEWS</h2>
+      <h4 class="st-section-heading-title">Últimos Posts</h4>
+      <h2 class="st-section-heading-subtitle">Últimos Posts</h2>
     </div>
     <div class="st-height-b25 st-height-lg-b25"></div>
   </div>
 
-  <!-- <BlogGridHome posts={posts}/> -->
+  <BlogGridHome posts={posts}/>
   <div class="st-height-b95 st-height-lg-b75"></div>
 </section>
 <!-- End Blog Seciton -->

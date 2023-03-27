@@ -1,69 +1,13 @@
 ---
 // Component Imports
+    import BaseLayout from "../layout/BaseLayout.astro"
     import BlogGridHome from "../components/Blog/BlogGridHome"
     const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
     const posts = result.data;
 ---
 
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-  <head>
-    <!-- Meta Tags -->
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Laralink" />
-    <!-- Page Title -->
-    <title>Raúl Camacho - Personal Portfolio</title>
-    <!-- Favicon Icon -->
-    <link rel="icon" href="assets/img/favicon.png" />
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/slick.css" />
-    <link rel="stylesheet" href="assets/css/lightgallery.min.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
 
-  <body id="home">
-    <!-- Start Header Section -->
-    <header class="st-site-header st-style1 st-sticky-header">
-      <div class="st-main-header">
-        <div class="container">
-          <div class="st-main-header-in">
-            <div class="st-main-header-left">
-              <a class="st-site-branding" href="index.html"
-                ><img src="assets/img/milogo.png" width="200px" alt="Raúl" /></a
-              >
-            </div>
-            <div class="st-main-header-right">
-              <div class="st-nav">
-                <ul class="st-nav-list st-onepage-nav">
-                  <li><a href="#home" class="st-smooth-move">Home</a></li>
-                  <li>
-                    <a href="#about" class="st-smooth-move">¿Quién Soy?</a>
-                  </li>
-                  <li>
-                    <a href="#resume" class="st-smooth-move">Trayectoria</a>
-                  </li>
-                  <li>
-                    <a href="#portfolio" class="st-smooth-move">Portafolio</a>
-                  </li>
-                  <!-- <li><a href="#blog" class="st-smooth-move">Blog</a></li> -->
-                  <li>
-                    <a href="#contact" class="st-smooth-move">Contáctame</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- End Header Section -->
-
+  <BaseLayout>
     <!-- Start Hero Seciton -->
     <section
       class="st-hero st-style2 st-bg st-dynamic-bg st-ripple-version"
@@ -655,9 +599,6 @@
             </div>
           </div>.st-single-progressbar -->
     </section>
-  </body>
-</html>
-
 <!-- End Skill Seciton -->
 
 <!-- Start Resume Seciton -->
@@ -1300,22 +1241,4 @@
 </section>
 <!-- End Contact Seciton -->
 
-<!-- Start Footer Seciton -->
-<footer>
-  <div class="container">
-    <div class="st-copyright-wrap text-center">
-      <div class="st-copyright-text">
-        © 2020. Diseñado por Raúl Camacho. Todos los derechos reservados.
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- End Footer Seciton -->
-
-<!-- Scripts -->
-<script is:inline src="/assets/js/jquery-1.12.4.min.js"></script>
-<script is:inline src="/assets/js/jquery.slick.min.js"></script>
-<script is:inline src="/assets/js/lightgallery.min.js"></script>
-<script is:inline src="/assets/js/wow.min.js"></script>
-<script is:inline src="/assets/js/ripples.min.js"></script>
-<script is:inline src="/assets/js/main.js"></script>
+</BaseLayout>

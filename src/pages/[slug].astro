@@ -1,0 +1,134 @@
+--- 
+    import BaseLayout from '../layout/BaseLayout.astro';
+    import { Markdown } from '@astropub/md';
+
+    export async function getStaticPaths() {
+      const result  =  await fetch(`http://192.168.100.28:1337/api/articles`).then(res => res.json());
+      const posts: [] = result.data;
+      return  posts.map(post =>  ({params : {slug:post.attributes.slug}}));
+    }
+    
+    const {slug} =  Astro.params
+    const pages = await fetch(`http://192.168.100.28:1337/api/articles?populate=*`).then(x  => x.json());
+    const page = pages.data.find(x  => x.attributes.slug === slug);
+    const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
+    const img = imagen.data.attributes.formats;
+
+---
+<BaseLayout>
+ <div class="st-content">
+    <div class="st-page-heading st-dynamic-bg" data-src={
+              imagen
+                ? `http://192.168.100.28:1337${img.medium.url}`
+                : 'https://via.placeholder.com/1080'
+            }>
+      <div class="container">
+        <div class="st-page-heading-in text-center">
+          <h1 class="st-page-heading-title">{title}</h1>
+          <div class="st-post-label">
+            <span>Por <a href="#">{author.data.attributes.name}</a></span>
+            <span>Tiempo de Lectura {readingTime}</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- .st-page-heading -->
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-md-1">
+          <div class="st-post-details st-style1">
+            <Markdown of={content}/>
+            <div class="st-height-b100 st-height-lg-b80"></div>
+            <div class="st-post-btn-gropu">
+              <a href="#" class="st-btn st-style2 st-color1 st-size-medium">Post Anterior</a>
+              <a href="#" class="st-btn st-style2 st-color1 st-size-medium">Próximo Post</a>
+            </div>
+          </div>
+          <div class="st-height-b60 st-height-lg-b60"></div>
+          <!-- <div class="comments-area">
+            <div class="comment-list-outer">
+              <h2 class="comments-title">Comments(3)</h2>
+              <ol class="comment-list">
+                <li class="comment">
+                  <div class="comment-body">
+                    <div class="comment-meta">
+                      <div class="comment-author">
+                        <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
+                        <a href="#" class="nm">Smith Jhon</a>
+                      </div>
+                      <div class="comment-metadata">
+                        <a href="#"><span>15 Jan, 2020</span></a>
+                      </div>
+                    </div>
+                    <div class="comment-content">
+                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    </div>
+                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                  </div>
+                  <ol class="children">
+                    <li class="comment">
+                      <div class="comment-body">
+                        <div class="comment-meta">
+                          <div class="comment-author">
+                            <img src="assets/img/comment2.jpg" alt="comment1" class="avatar">
+                            <span class="nm"><a href="#">Robat Newman</a></span>
+                          </div>
+                          <div class="comment-metadata">
+                            <a href="#"><span>15 Jan, 2020</span></a>
+                          </div>
+                        </div>
+                        <div class="comment-content">
+                          <p>Consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer.</p>
+                        </div>
+                        <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                      </div>
+                    </li>
+                  </ol>
+                </li>
+                <li class="comment">
+                  <div class="comment-body">
+                    <div class="comment-meta">
+                      <div class="comment-author">
+                        <img src="assets/img/comment1.jpg" alt="comment1" class="avatar">
+                        <span class="nm"><a href="#">Hannibal Lecter</a></span>
+                      </div>
+                      <div class="comment-metadata">
+                        <a href="#"><span>26 Jan, 2016</span></a>
+                      </div>
+                    </div>
+                    <div class="comment-content">
+                      <p>Lorem ipsum dolor sit amet. Lorem ipsum adipiscing elit.</p>
+                    </div>
+                    <div class="reply"><a href="#" class="comment-reply-link">Reply</a></div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+            <div class="comment-respond">
+              <h2 class="comment-reply-title">Add your comment</h2>
+              <form method="post" class="comment-form">
+                <p class="comment-form-author">
+                  <input name="author" type="text" placeholder="Name*" required="">
+                </p>
+                <p class="comment-form-email">
+                  <input name="email" type="email" placeholder="E-mail*" required="">
+                </p>
+                <p class="comment-form-url">
+                  <input id="url" name="url" type="url" placeholder="Website">
+                </p>
+                <p class="comment-form-comment">
+                  <textarea name="comment" cols="40" rows="5" placeholder="Write here...*" required=""></textarea>
+                </p>
+                <p class="form-submit">
+                  <button type="submit" class="st-btn st-style1 st-color1 st-size-medium">Post Comment</button>
+                </p>
+              </form>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+  </div>
+    <!-- End Blog Details -->
+    </BaseLayout>

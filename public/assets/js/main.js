@@ -1,6 +1,5 @@
 (function ($) {
-
-  "use strict";
+  'use strict';
 
   /*
   |--------------------------------------------------------------------------
@@ -34,14 +33,14 @@
     return $(selector).length > 0;
   };
 
-  $(window).on("load", function () {
-    $(window).trigger("scroll");
-    $(window).trigger("resize");
+  $(window).on('load', function () {
+    $(window).trigger('scroll');
+    $(window).trigger('resize');
     preloaderSetup();
   });
 
-  $(document).on("ready", function () {
-    $(window).trigger("resize");
+  $(document).on('ready', function () {
+    $(window).trigger('resize');
     dynamicBackground();
     formValidation();
     progressBarInit();
@@ -55,10 +54,9 @@
     parallaxEffect();
     rippleInit();
     new WOW().init();
-
   });
 
-  $(window).on("scroll", function () {
+  $(window).on('scroll', function () {
     stickyHeader();
     parallaxEffect();
   });
@@ -67,8 +65,8 @@
     1. Placeholder
   --------------------------------------------------------------*/
   function preloaderSetup() {
-    $(".st-perloader").fadeOut();
-    $("st-perloader-in").delay(150).fadeOut("slow");
+    $('.st-perloader').fadeOut();
+    $('st-perloader-in').delay(150).fadeOut('slow');
   }
 
   /*--------------------------------------------------------------
@@ -79,7 +77,7 @@
     $('.st-dynamic-bg').each(function () {
       var src = $(this).attr('data-src');
       $(this).css({
-        'background-image': 'url(' + src + ')'
+        'background-image': 'url(' + src + ')',
       });
     });
   }
@@ -89,9 +87,14 @@
   --------------------------------------------------------------*/
   function mainMenu() {
     $('.st-nav').append('<span class="st-munu-toggle"><span></span></span>');
-    $('.menu-item-has-children').append('<span class="st-munu-dropdown-toggle"></span>');
+    $('.menu-item-has-children').append(
+      '<span class="st-munu-dropdown-toggle"></span>'
+    );
     $('.st-munu-toggle').on('click', function () {
-      $(this).toggleClass("st-toggle-active").siblings('.st-nav-list').slideToggle();;
+      $(this)
+        .toggleClass('st-toggle-active')
+        .siblings('.st-nav-list')
+        .slideToggle();
     });
     $('.st-munu-dropdown-toggle').on('click', function () {
       $(this).toggleClass('active').siblings('ul').slideToggle();
@@ -119,9 +122,12 @@
       var thisAttr = $(this).attr('href');
       if ($(thisAttr).length) {
         var scrollPoint = $(thisAttr).offset().top - 10;
-        $('body,html').animate({
-          scrollTop: scrollPoint
-        }, 800);
+        $('body,html').animate(
+          {
+            scrollTop: scrollPoint,
+          },
+          800
+        );
       }
       return false;
     });
@@ -134,7 +140,7 @@
       var $this = $(this),
         $parent = $this.parent(),
         current = null,
-        $findLinks = $this.find("a");
+        $findLinks = $this.find('a');
 
       function getHeader(top) {
         var last = $findLinks.first();
@@ -143,9 +149,9 @@
         }
         for (var i = 0; i < $findLinks.length; i++) {
           var $link = $findLinks.eq(i),
-            href = $link.attr("href");
+            href = $link.attr('href');
 
-          if (href.charAt(0) === "#" && href.length > 1) {
+          if (href.charAt(0) === '#' && href.length > 1) {
             var $anchor = $(href).first();
             if ($anchor.length > 0) {
               var offset = $anchor.offset();
@@ -159,7 +165,7 @@
         return last;
       }
 
-      $(window).on("scroll", function () {
+      $(window).on('scroll', function () {
         var top = window.scrollY,
           height = $this.outerHeight(),
           max_bottom = $parent.offset().top + $parent.outerHeight(),
@@ -168,25 +174,23 @@
         var $current = getHeader(top);
 
         if (current !== $current) {
-          $this.find(".active").removeClass("active");
-          $current.addClass("active");
+          $this.find('.active').removeClass('active');
+          $current.addClass('active');
           current = $current;
         }
       });
     });
   }
 
-
   /*--------------------------------------------------------------
     6. Progress Bar
   --------------------------------------------------------------*/
   function progressBarInit() {
     $('.st-progressbar').each(function () {
-      var progressPercentage = $(this).data('progress') + "%";
+      var progressPercentage = $(this).data('progress') + '%';
       $(this).find('.st-progressbar-in').css('width', progressPercentage);
     });
   }
-
 
   /*--------------------------------------------------------------
     7. Ajax Contact Form And Appointment
@@ -201,10 +205,15 @@
         var phone = $('#phone').val();
         var email = $('#email').val();
         var msg = $('#msg').val();
-        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var regex =
+          /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         if (!regex.test(email)) {
-          $('#st-alert').fadeIn().html('<div class="alert alert-danger"><strong>Warning!</strong> Please Enter Valid Email.</div>');
+          $('#st-alert')
+            .fadeIn()
+            .html(
+              '<div class="alert alert-danger"><strong>Warning!</strong> Please Enter Valid Email.</div>'
+            );
           return false;
         }
 
@@ -215,14 +224,20 @@
         msg = $.trim(msg);
 
         if (name != '' && email != '' && msg != '') {
-          var values = "name=" + name +
-            "&subject=" + subject +
-            "&phone=" + phone +
-            "&email=" + email +
-            "&msg=" + msg;
+          var values =
+            'name=' +
+            name +
+            '&subject=' +
+            subject +
+            '&phone=' +
+            phone +
+            '&email=' +
+            email +
+            '&msg=' +
+            msg;
           $.ajax({
-            type: "POST",
-            url: "assets/php/mail.php",
+            type: 'POST',
+            url: 'assets/php/mail.php',
             data: values,
             success: function () {
               $('#name').val('');
@@ -231,20 +246,27 @@
               $('#email').val('');
               $('#msg').val('');
 
-              $('#st-alert').fadeIn().html('<div class="alert alert-success"><strong>Success!</strong> Email has been sent successfully.</div>');
+              $('#st-alert')
+                .fadeIn()
+                .html(
+                  '<div class="alert alert-success"><strong>Success!</strong> Email has been sent successfully.</div>'
+                );
               setTimeout(function () {
                 $('#st-alert').fadeOut('slow');
               }, 4000);
-            }
+            },
           });
         } else {
-          $('#st-alert').fadeIn().html('<div class="alert alert-danger"><strong>Warning!</strong> All fields are required.</div>');
+          $('#st-alert')
+            .fadeIn()
+            .html(
+              '<div class="alert alert-danger"><strong>Warning!</strong> All fields are required.</div>'
+            );
         }
         return false;
       });
     }
   }
-
 
   /*--------------------------------------------------------------
     8. Light Gallery
@@ -255,7 +277,7 @@
         selector: '.st-lightbox-item',
         subHtmlSelectorRelative: false,
         thumbnail: false,
-        mousewheel: true
+        mousewheel: true,
       });
     });
   }
@@ -264,16 +286,14 @@
     9. Social Button Hover
   --------------------------------------------------------------*/
   function socialBtnHover() {
-    $(".st-social-btn").hover(
-      function () {
-        $(this).addClass("active").siblings().removeClass('active');
-      }
-    )
+    $('.st-social-btn').hover(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+    });
   }
 
   /*--------------------------------------------------------------
     10. Slick Slider
-  --------------------------------------------------------------*/ 
+  --------------------------------------------------------------*/
   function slickInit() {
     $('.st-slider').each(function () {
       // Slick Variable
@@ -311,7 +331,7 @@
       }
       // Fade Slider
       var fadeVar = parseInt($($ts).attr('data-fade-slide'));
-      (fadeVar === 1) ? (fadeVar = true) : (fadeVar = false);
+      fadeVar === 1 ? (fadeVar = true) : (fadeVar = false);
 
       // Slick Active Code
       $slickActive.slick({
@@ -328,148 +348,149 @@
         nextArrow: $(this).find('.slick-arrow-right'),
         appendDots: $(this).find('.pagination'),
         slidesToShow: slidesPerView,
-        responsive: [{
-          breakpoint: 1600,
-          settings: {
-            slidesToShow: lgPoint
-          }
-        },
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: mdPoint
-          }
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: smPoint
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: xsPoing
-          }
-        }
-        ]
+        responsive: [
+          {
+            breakpoint: 1600,
+            settings: {
+              slidesToShow: lgPoint,
+            },
+          },
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: mdPoint,
+            },
+          },
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: smPoint,
+            },
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: xsPoing,
+            },
+          },
+        ],
       });
-    })
+    });
   }
   /*--------------------------------------------------------------
     11. particles
-  --------------------------------------------------------------*/ 
+  --------------------------------------------------------------*/
   function particles() {
     if ($.exists('#particles-js')) {
-      particlesJS("particles-js", {
-        "particles": {
-          "number": {
-            "value": 355,
-            "density": {
-              "enable": true,
-              "value_area": 789.1476416322727
-            }
-          },
-          "color": {
-            "value": "#ffffff"
-          },
-          "shape": {
-            "type": "circle",
-            "stroke": {
-              "width": 0,
-              "color": "#000000"
+      particlesJS('particles-js', {
+        particles: {
+          number: {
+            value: 355,
+            density: {
+              enable: true,
+              value_area: 789.1476416322727,
             },
-            "polygon": {
-              "nb_sides": 5
+          },
+          color: {
+            value: '#ffffff',
+          },
+          shape: {
+            type: 'circle',
+            stroke: {
+              width: 0,
+              color: '#000000',
             },
-            "image": {
-              "src": "img/github.svg",
-              "width": 100,
-              "height": 100
-            }
+            polygon: {
+              nb_sides: 5,
+            },
+            image: {
+              src: 'img/github.svg',
+              width: 100,
+              height: 100,
+            },
           },
-          "opacity": {
-            "value": 0.48927153781200905,
-            "random": false,
-            "anim": {
-              "enable": true,
-              "speed": 0.6,
-              "opacity_min": 0,
-              "sync": false
-            }
+          opacity: {
+            value: 0.48927153781200905,
+            random: false,
+            anim: {
+              enable: true,
+              speed: 0.6,
+              opacity_min: 0,
+              sync: false,
+            },
           },
-          "size": {
-            "value": 2,
-            "random": true,
-            "anim": {
-              "enable": true,
-              "speed": 5,
-              "size_min": 0,
-              "sync": false
-            }
+          size: {
+            value: 2,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 5,
+              size_min: 0,
+              sync: false,
+            },
           },
-          "line_linked": {
-            "enable": false,
-            "distance": 150,
-            "color": "#ffffff",
-            "opacity": 0.4,
-            "width": 1
+          line_linked: {
+            enable: false,
+            distance: 150,
+            color: '#ffffff',
+            opacity: 0.4,
+            width: 1,
           },
-          "move": {
-            "enable": true,
-            "speed": 0.2,
-            "direction": "none",
-            "random": true,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false,
-            "attract": {
-              "enable": false,
-              "rotateX": 600,
-              "rotateY": 1200
-            }
-          }
+          move: {
+            enable: true,
+            speed: 0.2,
+            direction: 'none',
+            random: true,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
         },
-        "interactivity": {
-          "detect_on": "canvas",
-          "events": {
-            "onhover": {
-              "enable": true,
-              "mode": "bubble"
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: true,
+              mode: 'bubble',
             },
-            "onclick": {
-              "enable": true,
-              "mode": "push"
+            onclick: {
+              enable: true,
+              mode: 'push',
             },
-            "resize": true
+            resize: true,
           },
-          "modes": {
-            "grab": {
-              "distance": 400,
-              "line_linked": {
-                "opacity": 1
-              }
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1,
+              },
             },
-            "bubble": {
-              "distance": 83.91608391608392,
-              "size": 1,
-              "duration": 3,
-              "opacity": 1,
-              "speed": 3
+            bubble: {
+              distance: 83.91608391608392,
+              size: 1,
+              duration: 3,
+              opacity: 1,
+              speed: 3,
             },
-            "repulse": {
-              "distance": 200,
-              "duration": 0.4
+            repulse: {
+              distance: 200,
+              duration: 0.4,
             },
-            "push": {
-              "particles_nb": 4
+            push: {
+              particles_nb: 4,
             },
-            "remove": {
-              "particles_nb": 2
-            }
-          }
+            remove: {
+              particles_nb: 2,
+            },
+          },
         },
-        "retina_detect": true
+        retina_detect: true,
       });
     }
   }
@@ -492,24 +513,28 @@
     13. Parallax Effect
   --------------------------------------------------------------*/
   function parallaxEffect() {
-    $('.st-parallax').each(function() {
+    $('.st-parallax').each(function () {
       var windowScroll = $(document).scrollTop(),
         windowHeight = $(window).height(),
         barOffset = $(this).offset().top,
         barHeight = $(this).height(),
         barScrollAtZero = windowScroll - barOffset + windowHeight,
         barHeightWindowHeight = windowScroll + windowHeight,
-        barScrollUp = barOffset <= (windowScroll + windowHeight),
+        barScrollUp = barOffset <= windowScroll + windowHeight,
         barSctollDown = barOffset + barHeight >= windowScroll;
 
       if (barSctollDown && barScrollUp) {
         var calculadedHeight = barHeightWindowHeight - barOffset;
-        var largeEffectPixel = ((calculadedHeight / 5));
-        var mediumEffectPixel = ((calculadedHeight / 20));
-        var miniEffectPixel = ((calculadedHeight / 10));
+        var largeEffectPixel = calculadedHeight / 5;
+        var mediumEffectPixel = calculadedHeight / 20;
+        var miniEffectPixel = calculadedHeight / 10;
 
-        $(this).find('.st-to-left').css('transform', `translateX(-${miniEffectPixel}px)`);
-        $(this).find('.st-to-right').css('transform', `translateX(${miniEffectPixel}px)`);
+        $(this)
+          .find('.st-to-left')
+          .css('transform', `translateX(-${miniEffectPixel}px)`);
+        $(this)
+          .find('.st-to-right')
+          .css('transform', `translateX(${miniEffectPixel}px)`);
         $(this).css('background-position', `center -${largeEffectPixel}px`);
       }
     });

@@ -10,7 +10,7 @@ const BlogGridItem = ({ post }) => {
   return (
     <div className="card-container">
       <div className="card">
-        <a href={`/post/${slug}`} className="card-img">
+        <a href={`/${slug}`} className="card-img">
           <img
             src={
               imagen
@@ -30,7 +30,7 @@ const BlogGridItem = ({ post }) => {
             <span className="card-content-data-time">{readingTime}</span>
           </div>
           <h4 className="card-content-title">
-            <a href={`/post/${slug}`}>{title}</a>
+            <a href={`/${slug}`}>{title}</a>
           </h4>
         </div>
       </div>

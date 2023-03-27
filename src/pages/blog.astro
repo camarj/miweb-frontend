@@ -1,0 +1,22 @@
+--- 
+    import BaseLayout from '../layout/BaseLayout.astro';
+    import BlogGridHome from "../components/Blog/BlogGridHome"
+    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=16`).then(res => res.json())
+    const posts = result.data;
+
+---
+<BaseLayout>
+ <div class="st-content">
+    <div class="st-page-heading st-dynamic-bg" data-src="">
+      <div class="container">
+        <div class="st-page-heading-in text-center">
+          <h1 class="st-page-heading-title">Posts del Blog</h1>     
+        </div>
+      </div>
+    </div><!-- .st-page-heading -->
+    <div class="st-height-b100 st-height-lg-b80"></div>
+    <BlogGridHome posts={posts}/>
+    <div class="st-height-b100 st-height-lg-b80"></div>
+  </div>
+    <!-- End Blog Details -->
+    </BaseLayout>

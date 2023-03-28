@@ -1,6 +1,7 @@
 --- 
     import BaseLayout from '../layout/BaseLayout.astro';
     import { Markdown } from '@astropub/md';
+    import BlogGridHome from "../components/Blog/BlogGridHome";
 
     export async function getStaticPaths() {
       const result  =  await fetch(`http://192.168.100.28:1337/api/articles`).then(res => res.json());
@@ -13,6 +14,9 @@
     const page = pages.data.find((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug === slug);
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
     const img = imagen.data.attributes.formats;
+
+    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
+    const posts = result.data;
 
 ---
 <BaseLayout>
@@ -128,7 +132,57 @@
         </div>
       </div>
     </div>
-    <div class="st-height-b100 st-height-lg-b80"></div>
   </div>
-    <!-- End Blog Details -->
-    </BaseLayout>
+<!-- Start Blog Seciton -->
+  <section id="blog">
+    <div class="container">
+      <div class="st-section-heading st-style1">
+        <h4 class="st-section-heading-title">Últimos Posts</h4>
+        <h2 class="st-section-heading-subtitle">Últimos Posts</h2>
+      </div>
+      <div class="st-height-b25 st-height-lg-b25"></div>
+    </div>
+    <BlogGridHome posts={posts}/>
+    <div class="st-height-b95 st-height-lg-b75"></div>
+  </section>
+  <!-- End Blog Seciton -->
+  <div class='container-general'>
+    <div class="st-social-info">
+    <div class="st-social-link">
+      <a href="#" class="st-social-btn active">
+        <span class="st-social-icon"
+          ><i class="fab fa-linkedin"></i></span
+        >
+        <span class="st-icon-name">LinkedIn</span>
+      </a>
+      <a href="#" class="st-social-btn">
+        <span class="st-social-icon"
+          ><i class="fab fa-facebook"></i></span
+        >
+        <span class="st-icon-name">Facebook</span>
+      </a>
+      <a href="#" class="st-social-btn">
+        <span class="st-social-icon"
+          ><i class="fab fa-instagram"></i></span
+        >
+        <span class="st-icon-name">Instagram</span>
+      </a>
+      <a href="#" class="st-social-btn">
+        <span class="st-social-icon"
+          ><i class="fab fa-twitter"></i></span
+        >
+        <span class="st-icon-name">Twitter</span>
+      </a>
+      <a href="#" class="st-social-btn">
+        <span class="st-social-icon"
+          ><i class="fab fa-youtube"></i></span
+        >
+        <span class="st-icon-name">Youtube</span>
+      </a>
+    </div>
+  </div>
+  </div>
+        
+  <div class="st-height-b100 st-height-lg-b80"></div>
+    
+</BaseLayout>

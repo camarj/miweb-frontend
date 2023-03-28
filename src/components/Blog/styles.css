@@ -1,3 +1,11 @@
+.container-general {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 65%;
+  gap: 25px;
+}
 .container-cards-home {
   display: flex;
   justify-content: space-between;

@@ -2,8 +2,8 @@ import React from 'react';
 import './styles.css';
 
 const BlogGridItem = ({ post }) => {
-  const data = post.attributes;
-  const { title, slug, readingTime, imagen, author } = data;
+  const datos = post.attributes;
+  const { title, slug, readingTime, imagen, author } = datos;
 
   const img = imagen.data.attributes.formats;
 

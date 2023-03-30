@@ -2,7 +2,7 @@
 // Component Imports
     import BaseLayout from "../layout/BaseLayout.astro"
     import BlogGridHome from "../components/Blog/BlogGridHome"
-    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
+    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&[sort][0]=createdAt%3Adesc&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
     const posts = result.data;
 ---
 

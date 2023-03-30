@@ -14,8 +14,13 @@
     const page = pages.data.find((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug === slug);
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
     const img = imagen.data.attributes.formats;
+    const catSlug = category.data.attributes.slug;
+    const catName = category.data.attributes.name;
+    
 
-    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?populate=*&?pagination[start]=0&pagination[limit]=3`).then(res => res.json())
+  
+
+    const result  =  await fetch(`http://192.168.100.28:1337/api/articles?filters[category][slug][$eq]=${catSlug}&populate=*&[sort][0]=createdAt%3Adesc`).then(res => res.json());
     const posts = result.data;
 
 ---
@@ -137,7 +142,7 @@
   <section id="blog">
     <div class="container">
       <div class="st-section-heading st-style1">
-        <h4 class="st-section-heading-title">Últimos Posts</h4>
+        <h4 class="st-section-heading-title">Últimos Posts Sobre {catName}</h4>
         <h2 class="st-section-heading-subtitle">Últimos Posts</h2>
       </div>
       <div class="st-height-b25 st-height-lg-b25"></div>

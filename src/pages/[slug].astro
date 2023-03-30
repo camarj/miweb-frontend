@@ -8,7 +8,9 @@
       const posts:any[] = result.data;
       return  posts.map(post =>  ({params : {slug:post.attributes.slug}}));
     }
-    
+
+
+    // Consulta de post
     const {slug} =  Astro.params
     const pages = await fetch(`http://192.168.100.28:1337/api/articles?populate=*`).then(x  => x.json());
     const page = pages.data.find((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug === slug);
@@ -17,11 +19,11 @@
     const catSlug = category.data.attributes.slug;
     const catName = category.data.attributes.name;
     
-
-  
-
+    // Consulta de posts relacionados
     const result  =  await fetch(`http://192.168.100.28:1337/api/articles?filters[category][slug][$eq]=${catSlug}&populate=*&[sort][0]=createdAt%3Adesc`).then(res => res.json());
     const posts = result.data;
+    const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug !== slug);
+
 
 ---
 <BaseLayout>
@@ -147,7 +149,7 @@
       </div>
       <div class="st-height-b25 st-height-lg-b25"></div>
     </div>
-    <BlogGridHome posts={posts}/>
+    <BlogGridHome posts={postsFilter}/>
     <div class="st-height-b95 st-height-lg-b75"></div>
   </section>
   <!-- End Blog Seciton -->

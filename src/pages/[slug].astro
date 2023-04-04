@@ -39,8 +39,8 @@
         <div class="st-page-heading-in text-center">
           <h1 class="st-page-heading-title">{title}</h1>
           <div class="st-post-label">
-            <span>Por <a href="#">{author.data.attributes.name}</a></span>
-            <span>Tiempo de Lectura {readingTime}</span>
+            <span>Por: <a href='/'>{author.data.attributes.name}</a></span>
+            <span>{readingTime} de lectura</span>
           </div>
         </div>
       </div>
@@ -51,7 +51,20 @@
         <div class="col-lg-10 offset-md-1">
           <div class="st-post-details st-style1">
             <Markdown of={content}/>
-            <div class="st-height-b100 st-height-lg-b80"></div>
+            
+        <div class="card-content">
+          <div class="card-content-data">
+            <img
+              class="image-avatar"
+              src={`${baseUrl}/uploads/profile_pic_3_181a7caa75.webp`}
+              alt="Raul Avatar"
+              width="100";
+            />
+            <a href="" class="card-content-data-autor">
+              {`  ${author.data.attributes.name}`}
+            </a>
+          </div>
+        </div>
             <div class='container-general'>
               <div class="st-social-info">
                 <div class="st-social-link">

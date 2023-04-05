@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@astrojs/react": "^2.1.0",
+    "@astrojs/vercel": "^3.2.1",
     "@astropub/md": "^0.2.0",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
-    "astro": "^2.0.18",
+    "astro": "^2.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

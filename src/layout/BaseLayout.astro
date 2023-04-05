@@ -1,4 +1,6 @@
-
+---
+const { pageTitle } = Astro.props;
+---
 
 <!DOCTYPE html>
 <html class="no-js" lang="es">
@@ -9,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Laralink" />
     <!-- Page Title -->
-    <title>Raúl Camacho - Personal Portfolio</title>
+    <title>Raúl Camacho - {pageTitle}</title>
     <!-- Favicon Icon -->
     <link rel="icon" href="assets/img/favicon.png" />
     <!-- Stylesheets -->

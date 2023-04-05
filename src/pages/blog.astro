@@ -4,8 +4,9 @@
     const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?populate=*&[sort][0]=createdAt%3Adesc&?pagination[start]=0&pagination[limit]=16`).then(res => res.json())
     const posts = result.data;
 
+    const pageTitle = "Blog";
 ---
-<BaseLayout>
+<BaseLayout pageTitle={pageTitle}>
  <div class="st-content">
     <div class="st-page-heading st-style2 st-bg st-dynamic-bg st-ripple-version" data-src="assets/img/hero-bg-3.jpg">
       <div class="container">

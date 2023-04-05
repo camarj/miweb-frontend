@@ -26,9 +26,9 @@
     const posts = result.data;
     const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug !== slug);
 
-
+    const pageTitle = "Post";
 ---
-<BaseLayout>
+<BaseLayout pageTitle={pageTitle}>
  <div class="st-content">
     <div class="st-page-heading st-dynamic-bg" data-src={
               imagen

@@ -10,7 +10,7 @@ const BlogGridHome = ({ posts }) => {
     <div className="container-cards-home">
       {posts && posts.length > 0
         ? posts.map(post => <BlogGridItem key={id} post={post} />)
-        : 'No posts founds'}
+        : 'Aún no hay posts publicados'}
     </div>
   );
 };

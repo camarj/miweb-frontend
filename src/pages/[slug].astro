@@ -3,20 +3,18 @@
     import { Markdown } from '@astropub/md';
     import BlogGridHome from "../components/Blog/BlogGridHome";
 
-      // const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles`).then(res => res.json());
-      // const posts:any[] = result.data;
-      // return  posts.map(post =>  ({params : {slug:post.attributes.slug}}));
-  
-
-
     // Consulta de post
-    const {slug} =  Astro.params;
+    const {slug, id} =  Astro.params;
+    console.log(slug, id);
     const pages = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?populate=*`).then(x  => x.json());
-    const page = pages.data.find((x: { attributes: { slug: string; }; })  => x.attributes?.slug === slug);
+    const page = pages.data.find((page: { attributes: { slug: string }; })  => page.attributes?.slug === slug);
+    if (!page) return Astro.redirect("/404");
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
     const img = imagen.data.attributes?.formats;
     const catSlug = category.data.attributes?.slug;
     const catName = category.data.attributes?.name;
+
+    console.log(page.attributes);
 
     const imgAuthor =
     'https://res.cloudinary.com/desigatof/image/upload/v1680795374/thumbnail_profile_pic_3_8f1bf83b0a.webp';

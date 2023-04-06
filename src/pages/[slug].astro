@@ -14,16 +14,17 @@
     const pages = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?populate=*`).then(x  => x.json());
     const page = pages.data.find((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug === slug);
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
-    const img = imagen.data.attributes.formats;
-    const catSlug = category.data.attributes.slug;
-    const catName = category.data.attributes.name;
+    const img = imagen.data.attributes?.formats;
+    const catSlug = category.data.attributes?.slug;
+    const catName = category.data.attributes?.name;
 
-    const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+    const imgAuthor =
+    'https://res.cloudinary.com/desigatof/image/upload/v1680795374/thumbnail_profile_pic_3_8f1bf83b0a.webp';
     
     // Consulta de posts relacionados
     const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?filters[category][slug][$eq]=${catSlug}&populate=*&[sort][0]=createdAt%3Adesc`).then(res => res.json());
     const posts = result.data;
-    const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug !== slug);
+    const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes?.slug !== slug);
 
     const pageTitle = "Post";
 ---
@@ -38,7 +39,7 @@
         <div class="st-page-heading-in text-center">
           <h1 class="st-page-heading-title">{title}</h1>
           <div class="st-post-label">
-            <span>Por: <a href='/'>{author.data.attributes.name}</a></span>
+            <span>Por: <a href='/'>{author.data.attributes?.name}</a></span>
             <span>{readingTime} de lectura</span>
           </div>
         </div>
@@ -55,12 +56,12 @@
           <div class="card-content-data">
             <img
               class="image-avatar"
-              src={`${baseUrl}/uploads/profile_pic_3_181a7caa75.webp`}
+              src={imgAuthor}
               alt="Raul Avatar"
               width="100"
             />
             <a href="" class="card-content-data-autor">
-              {`  ${author.data.attributes.name}`}
+              {`  ${author.data.attributes?.name}`}
             </a>
           </div>
         </div>

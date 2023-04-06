@@ -10,9 +10,9 @@
 
 
     // Consulta de post
-    const {slug} =  Astro.params
+    const {slug} =  Astro.params;
     const pages = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?populate=*`).then(x  => x.json());
-    const page = pages.data.find((x: { attributes: { slug: string | undefined; }; })  => x.attributes.slug === slug);
+    const page = pages.data.find((x: { attributes: { slug: string; }; })  => x.attributes?.slug === slug);
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
     const img = imagen.data.attributes?.formats;
     const catSlug = category.data.attributes?.slug;

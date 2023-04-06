@@ -25,7 +25,8 @@ const BlogGridItem = ({ post }) => {
           <div className="card-content-data">
             <img
               className="image-avatar"
-              src={`${baseUrl}/uploads/profile_pic_3_181a7caa75.webp`}
+              // src={`${baseUrl}/uploads/profile_pic_3_181a7caa75.webp`}
+              src=""
               alt="Raul Avatar"
             />
             <a href="" className="card-content-data-autor">

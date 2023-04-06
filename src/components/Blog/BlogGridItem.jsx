@@ -6,7 +6,8 @@ const BlogGridItem = ({ post }) => {
   const { title, slug, readingTime, imagen, author } = datos;
 
   const img = imagen.data.attributes.formats;
-  const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+  const imgAuthor =
+    'https://res.cloudinary.com/desigatof/image/upload/v1680795374/thumbnail_profile_pic_3_8f1bf83b0a.webp';
 
   return (
     <div className="card-container">
@@ -21,12 +22,7 @@ const BlogGridItem = ({ post }) => {
         </a>
         <div className="card-content">
           <div className="card-content-data">
-            <img
-              className="image-avatar"
-              // src={`${baseUrl}/uploads/profile_pic_3_181a7caa75.webp`}
-              src=""
-              alt="Raul Avatar"
-            />
+            <img className="image-avatar" src={imgAuthor} alt="Raul Avatar" />
             <a href="" className="card-content-data-autor">
               {author.data.attributes.name}
             </a>

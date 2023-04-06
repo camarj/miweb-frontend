@@ -14,9 +14,7 @@ const BlogGridItem = ({ post }) => {
         <a href={`/${slug}`} className="card-img">
           <img
             src={
-              imagen
-                ? `${baseUrl}${img.medium.url}`
-                : 'https://via.placeholder.com/1080'
+              imagen ? `${img.medium.url}` : 'https://via.placeholder.com/1080'
             }
             alt={title}
           />

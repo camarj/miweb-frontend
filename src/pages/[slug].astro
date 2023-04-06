@@ -3,11 +3,10 @@
     import { Markdown } from '@astropub/md';
     import BlogGridHome from "../components/Blog/BlogGridHome";
 
-    export async function getStaticPaths() {
-      const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles`).then(res => res.json());
-      const posts:any[] = result.data;
-      return  posts.map(post =>  ({params : {slug:post.attributes.slug}}));
-    }
+      // const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles`).then(res => res.json());
+      // const posts:any[] = result.data;
+      // return  posts.map(post =>  ({params : {slug:post.attributes.slug}}));
+  
 
 
     // Consulta de post

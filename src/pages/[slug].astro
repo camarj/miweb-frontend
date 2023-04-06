@@ -7,10 +7,10 @@
     const {slug, id} =  Astro.params;
     console.log(slug, id);
     const pages = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?populate=*`).then(x  => x.json());
-    const page = await pages.data.find((page: { attributes: { slug: string }; })  => page.attributes.slug === slug);
+    const page = await pages.data.find((page: { attributes: { slug: string  }; })  => page.attributes.slug === slug);
     if (!page) return Astro.redirect("/404");
     const {title, content, imagen, author, category, created_at, readingTime} = page.attributes;
-    const img = imagen.data.attributes?.formats;
+    const img = imagen.data.attributes.formats;
     const catSlug = category.data.attributes?.slug;
     const catName = category.data.attributes?.name;
 
@@ -20,9 +20,9 @@
     'https://res.cloudinary.com/desigatof/image/upload/v1680795374/thumbnail_profile_pic_3_8f1bf83b0a.webp';
     
     // Consulta de posts relacionados
-    const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?filters[category][slug][$eq]=${catSlug}&populate=*&[sort][0]=createdAt%3Adesc`).then(res => res.json());
-    const posts = result.data;
-    const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes?.slug !== slug);
+    // const result  =  await fetch(`${import.meta.env.PUBLIC_BASE_URL}/api/articles?filters[category][slug][$eq]=${catSlug}&populate=*&[sort][0]=createdAt%3Adesc`).then(res => res.json());
+    // const posts = result.data;
+    // const postsFilter = posts.filter((x: { attributes: { slug: string | undefined; }; })  => x.attributes?.slug !== slug);
 
     const pageTitle = "Post";
 ---
@@ -199,7 +199,7 @@
       </div>
       <div class="st-height-b25 st-height-lg-b25"></div>
     </div>
-    <BlogGridHome posts={postsFilter}/>
+    <!-- <BlogGridHome posts={postsFilter}/> -->
     <div class="st-height-b95 st-height-lg-b75"></div>
   </section>
   <!-- End Blog Seciton -->
